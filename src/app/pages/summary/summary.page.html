@@ -1,0 +1,84 @@
+<div class="logo text-center">
+  <img src="../../../assets/images/logo.png" alt="Niilano Logo">
+</div>
+
+<h2> <ion-icon size="large" class="me-1" style="color: #1A4640;" name="stats-chart-outline"></ion-icon> Summary</h2>
+
+<ion-row>
+
+  <ion-col size="12" size-md="4" size-lg="3" >
+
+    <ion-card class="summary-items" color="primary">
+
+      <ion-card-header>
+        <ion-card-title>
+          <p class="m-2 mb-3"> <strong class="fw-bolder fs-2 bg-dark p-2 rounded"> {{users}} </strong> </p>
+          <h3 class="m-0"> Users</h3>
+        </ion-card-title>
+        <ion-card-subtitle>Registered Users</ion-card-subtitle>
+      </ion-card-header>
+
+      <i class="fa-solid fa-users" id="summary-icons"
+        style="position: absolute; color: #1a464059; top: 10%; right: 10%; font-size: 7em; z-index: -1;"></i>
+
+      <ion-card-content>
+        <ion-button routerLink="users" expand="block" style="--background: #1a464059; color:#f2f2f2;">
+          More info <ion-icon class="ms-1" name="arrow-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+
+    </ion-card>
+
+  </ion-col>
+
+  <ion-col size="12" size-md="4" size-lg="3">
+
+    <ion-card class="summary-items" color="secondary">
+
+      <ion-card-header>
+        <ion-card-title>
+          <p class="m-2 mb-3"> <strong class="fw-bolder fs-2 bg-dark p-2 rounded"> {{products}} </strong> </p>
+          <h3 class="m-0"> Products</h3>
+        </ion-card-title>
+        <ion-card-subtitle>Products Listed</ion-card-subtitle>
+      </ion-card-header>
+
+      <i class="fa-solid fa-warehouse" id="summary-icons"
+        style="position: absolute; color: #1a464059; top: 10%; right: 10%; font-size: 7em; z-index: -1;"></i>
+
+      <ion-card-content>
+        <ion-button routerLink="products" expand="block" style="--background: #1a464059; color:#f2f2f2;">
+          More info <ion-icon class="ms-1" name="arrow-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+
+    </ion-card>
+
+  </ion-col>
+
+  <ion-col size="12" size-md="4" size-lg="3">
+
+    <ion-card class="summary-items" color="warning">
+
+      <ion-card-header>
+        <ion-card-title>
+          <p class="m-2 mb-3"> <strong class="fw-bolder fs-2 bg-dark text-light p-2 rounded"> {{categories}} </strong> </p>
+          <h3 class="m-0"> Categories</h3>
+        </ion-card-title>
+        <ion-card-subtitle>Categories available</ion-card-subtitle>
+      </ion-card-header>
+
+      <i class="fa-regular fa-star" id="summary-icons"
+        style="position: absolute; color: #1a464059; top: 10%; right: 10%; font-size: 7em; z-index: -1;"></i>
+
+      <ion-card-content>
+        <ion-button routerLink="categories" expand="block" style="--background: #1a464059; color:#f2f2f2;">
+          More info <ion-icon class="ms-1" name="arrow-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+
+    </ion-card>
+
+  </ion-col>
+
+</ion-row>

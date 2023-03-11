@@ -1,0 +1,346 @@
+
+<app-loading *ngIf="load"></app-loading>
+
+<div *ngIf="!subcategories">
+  
+<h2 class="m-0 mb-4"> All Categories </h2>
+
+
+<button id="open-modal" class="btn text-light d-block mx-auto p-2" style="background: #1A4640;">
+
+  <i class="text-light mb-2 fa-solid fa-plus-circle fa-4x"></i> <br>
+
+  Add a new category
+
+</button>
+
+<ion-modal trigger="open-modal" >
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+
+        <ion-title> Add Category </ion-title>
+
+        <ion-buttons (click)="closeModal()" slot="end">
+          <ion-button [strong]="true">
+            <ion-icon size="large" name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+
+      <ion-item lines="none">
+        <ion-label position="floating">Enter name of Category</ion-label>
+        <ion-input type="text" placeholder="Category Name" [(ngModel)]="categoryName" ></ion-input>
+        <ion-note slot="helper">** This field is required</ion-note>
+        <ion-note slot="error">** This field is required</ion-note>
+      </ion-item>
+
+      <ion-item lines="none" class="mt-3">
+        <ion-label position="floating">Enter description of category</ion-label>
+        <ion-textarea type="text" placeholder="Category Description" [(ngModel)]="categoryDes" ></ion-textarea>
+      </ion-item>
+
+      <div class="container mt-3 overflow-hidden ">
+        <h3 class="text-dark">Category Image:</h3>
+        <ion-img class="w-100" *ngIf="categoryImage" [src]="categoryImage.img"></ion-img>
+        <input type="file" (change)="onSelectCategoryImage($event)" hidden id="catImage" />
+  
+        <label *ngIf="categoryImage" for="catImage"
+          class="btn btn-success d-flex justify-content-center align-items-center w-100 mt-2">
+          <ion-icon class="me-2" name="shuffle-outline" size="large"></ion-icon> Change category image
+        </label>
+  
+        <label *ngIf="!categoryImage" for="catImage"
+          class="btn btn-success d-flex justify-content-center align-items-center w-100 mt-2">
+          <ion-icon class="me-2" name="add-circle-outline" size="large"></ion-icon> Click to Upload category image
+        </label>
+  
+      </div>
+
+      <ion-button (click)="addCategory()" class="mt-3 w-100" style="--background: #1A4640;">
+        Submit Category
+      </ion-button>
+
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+
+<ion-modal [isOpen]="editCategoryOpen" >
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+
+        <ion-title> Edit Category </ion-title>
+
+        <ion-buttons (click)="closeEditCategoryModal()" slot="end">
+          <ion-button [strong]="true">
+            <ion-icon size="large" name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+
+      <ion-item lines="none">
+        <ion-label position="floating">Name of Category</ion-label>
+        <ion-input type="text" placeholder="Category Name" [(ngModel)]="editCategoryName" ></ion-input>
+        <ion-note slot="helper">** This field is required</ion-note>
+        <ion-note slot="error">** This field is required</ion-note>
+      </ion-item>
+
+      <ion-item lines="none" class="mt-3">
+        <ion-label position="floating">Description of category</ion-label>
+        <ion-textarea type="text" placeholder="Category Description" [(ngModel)]="editCategoryDes" ></ion-textarea>
+      </ion-item>
+
+      <div class="container mt-3 overflow-hidden ">
+        <h3 class="text-dark">Category Image:</h3>
+        <ion-img class="w-100" *ngIf="editCategoryImage" [src]="editCategoryImage.url"></ion-img>
+        <input type="file" (change)="editCategoryImageChange($event)" hidden id="editCategoryImage" />
+  
+        <label *ngIf="editCategoryImage" for="editCategoryImage"
+          class="btn btn-success d-flex justify-content-center align-items-center w-100 mt-2">
+          <ion-icon class="me-2" name="shuffle-outline" size="large"></ion-icon> Change category image
+        </label>
+  
+        <label *ngIf="!editCategoryImage" for="editCategoryImage"
+          class="btn btn-success d-flex justify-content-center align-items-center w-100 mt-2">
+          <ion-icon class="me-2" name="add-circle-outline" size="large"></ion-icon> Click to Upload category image
+        </label>
+  
+      </div>
+
+      <ion-button (click)="saveCategoryChanges()" class="mt-3 w-100" style="--background: #1A4640;">
+        Make Changes
+      </ion-button>
+
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-grid>
+  <ion-row>
+    <ion-col *ngFor="let category of categories">
+      <ion-card class="h-100">
+        
+        <ion-card-header>
+          <ion-card-title>
+            
+            <ion-item lines="none">
+              <ion-thumbnail slot="start">
+                <img class="h-100" [src]="category.image.url" alt="{{category.name}}">
+              </ion-thumbnail>
+              <ion-label>{{category.name}}</ion-label>
+            </ion-item>
+
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{category.description}}
+        </ion-card-content>
+
+        <ion-item lines="none">
+
+          <ion-button slot="start" fill="clear" [routerLink]="[category.id]"> Sub-Categories <ion-icon class="ms-2" name="arrow-forward-outline"></ion-icon> </ion-button>
+            
+          <ion-buttons slot="end">
+
+            <ion-button color="primary" (click)="editCategory(category.id)" fill="clear"> <ion-icon name="create-outline"></ion-icon> </ion-button>
+
+            <ion-button color="danger" fill="clear" (click)="removeCategory(category.id)"> <ion-icon name="trash-outline"></ion-icon> </ion-button>
+
+          </ion-buttons>
+
+          </ion-item>
+
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+</div>
+
+
+
+
+
+
+
+
+<div *ngIf="subcategories">
+
+  <ion-buttons>
+    <ion-back-button color="danger" defaultHref="/dashboard/categories" text="Back to all categories"> </ion-back-button>
+  </ion-buttons>
+  
+  <ion-item class="mt-2" lines="none" style="--background: transparent;">
+    <ion-thumbnail slot="start">
+      <img class="h-100" [src]="selectedCategory?.image?.url" alt="{{selectedCategory?.name}}">
+    </ion-thumbnail>
+    <ion-label>
+      <h3>
+        {{selectedCategory?.name}}
+      </h3>
+      <p>
+        {{selectedCategory?.Subcategories?.length}} Sub Categories
+      </p>
+    </ion-label>
+  </ion-item>
+
+  
+  <button id="subcategorymodal" class="btn text-light mt-3 d-block mx-auto p-3" style="background: #1A4640;">
+  
+    <i class="text-light fa-solid fa-plus-circle mb-3 fa-4x"></i> <br>
+  
+    Add a new sub category
+  
+  </button>
+  
+  <ion-modal trigger="subcategorymodal" >
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+  
+          <ion-title> New Sub category </ion-title>
+  
+          <ion-buttons (click)="closeModal()" slot="end">
+            <ion-button [strong]="true">
+              <ion-icon size="large" name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+  
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+  
+        <ion-item lines="none">
+          <ion-label position="floating">Enter name of Sub Category</ion-label>
+          <ion-input type="text" placeholder="Sub Category Name" [(ngModel)]="subCategoryName" ></ion-input>
+        </ion-item>
+  
+        <ion-item lines="none" class="mt-3">
+          <ion-label position="floating">Enter description of Sub category</ion-label>
+          <ion-textarea type="text" placeholder="Sub Category Description" [(ngModel)]="subCategoryDes" ></ion-textarea>
+        </ion-item>
+
+        <div class="container mt-3 overflow-hidden ">
+          <h3 class="text-dark">Sub Category Image:</h3>
+          <ion-img class="w-100" *ngIf="subCategoryImage" [src]="subCategoryImage.img"></ion-img>
+          <input type="file" (change)="onSelectSubCategoryImage($event)" hidden id="mainImage" />
+    
+          <label *ngIf="subCategoryImage" for="mainImage"
+            class="btn btn-success d-flex justify-content-center align-items-center w-100 mt-2">
+            <ion-icon class="me-2" name="shuffle-outline" size="large"></ion-icon> Change Sub Category image
+          </label>
+    
+          <label *ngIf="!subCategoryImage" for="mainImage"
+            class="btn btn-success d-flex justify-content-center align-items-center w-100 mt-2">
+            <ion-icon class="me-2" name="add-circle-outline" size="large"></ion-icon> Click to Upload Sub Category image
+          </label>
+    
+        </div>
+  
+        <ion-button (click)="addSubCategory()" class="mt-3 w-100" style="--background: #1A4640;">
+          Submit Sub Category
+        </ion-button>
+  
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
+  <ion-modal [isOpen]="editSubCategoryOpen" >
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+  
+          <ion-title> Edit Sub-Category </ion-title>
+  
+          <ion-buttons (click)="closeEditSubCategoryModal()" slot="end">
+            <ion-button [strong]="true">
+              <ion-icon size="large" name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+  
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+  
+        <ion-item lines="none">
+          <ion-label position="floating">Name of Sub-Category</ion-label>
+          <ion-input type="text" placeholder="Category Name" [(ngModel)]="editSubCategoryName" ></ion-input>
+          <ion-note slot="helper">** This field is required</ion-note>
+          <ion-note slot="error">** This field is required</ion-note>
+        </ion-item>
+  
+        <ion-item lines="none" class="mt-3">
+          <ion-label position="floating">Description of sub-category</ion-label>
+          <ion-textarea type="text" placeholder="Category Description" [(ngModel)]="editSubCategoryDes" ></ion-textarea>
+        </ion-item>
+  
+        <div class="container mt-3 overflow-hidden ">
+          <h3 class="text-dark">Sub-Category Image:</h3>
+          <ion-img class="w-100" *ngIf="editSubCategoryImage" [src]="editSubCategoryImage.url"></ion-img>
+          <input type="file" (change)="editSubCategoryImageChange($event)" hidden id="editSubCategoryImage" />
+    
+          <label *ngIf="editSubCategoryImage" for="editSubCategoryImage"
+            class="btn btn-success d-flex justify-content-center align-items-center w-100 mt-2">
+            <ion-icon class="me-2" name="shuffle-outline" size="large"></ion-icon> Change sub-category image
+          </label>
+    
+          <label *ngIf="!editSubCategoryImage" for="editSubCategoryImage"
+            class="btn btn-success d-flex justify-content-center align-items-center w-100 mt-2">
+            <ion-icon class="me-2" name="add-circle-outline" size="large"></ion-icon> Click to Upload sub-category image
+          </label>
+    
+        </div>
+  
+        <ion-button (click)="saveSubCategoryChanges()" class="mt-3 w-100" style="--background: #1A4640;">
+          Save Changes
+        </ion-button>
+  
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let sub of selectedCategory?.Subcategories">
+        <ion-card class="h-100">
+          
+          <ion-card-header>
+            <ion-card-title>
+              
+              <ion-item lines="none">
+                <ion-thumbnail slot="start">
+                  <img class="h-100" src="{{sub.image.url}}" alt="{{sub.name}}">
+                </ion-thumbnail>
+                <ion-label>{{sub.name}}</ion-label>
+              </ion-item>
+  
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{sub.description}}
+          </ion-card-content>
+  
+          <ion-item lines="none">
+            
+          <ion-button slot="start" fill="clear" (click)="editSubCategory(sub.id)" > <ion-icon name="create-outline"></ion-icon> </ion-button>
+
+          <ion-button slot="end" fill="clear" (click)="removeSubCategory(sub.id)"> <ion-icon name="trash-outline"></ion-icon> </ion-button>
+
+          </ion-item>
+  
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  </div>
