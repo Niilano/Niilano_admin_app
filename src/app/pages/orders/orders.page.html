@@ -33,9 +33,10 @@
 
 <ion-item lines="none">
   <ion-thumbnail class="h-100" slot="start">
-    <img alt="product" [src]="order.product.image.url" />
+    <img *ngIf="order.product" alt="product" [src]="order.product.image.url" />
+    <ion-icon *ngIf="!order.product" size="large" color="danger" name="close-circle-outline"></ion-icon>
   </ion-thumbnail>
-  <ion-label>
+  <ion-label text-wrap>
     <h2>Order #{{ order.id }}</h2>
     <p>Date: {{ order.createdAt | date:'MMM d, y h:mm a' }}</p>
     <p>Updated: {{ order.updatedAt | date:'MMM d, y h:mm a' }}</p>
@@ -57,7 +58,7 @@
         <ion-col size="3"><h3>Quantity</h3></ion-col>
 
         <ion-col class="ion-text-start" size="9">
-          <p class="text-wrap">{{order.product.name}}</p>
+          <p class="text-wrap">{{order.product ? order.product.name : 'Product removed' }}</p>
         </ion-col>
 
         <ion-col size="3">
