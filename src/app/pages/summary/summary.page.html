@@ -81,4 +81,29 @@
 
   </ion-col>
 
+  <ion-col size="12" size-md="4" size-lg="3">
+
+    <ion-card class="orders-items" color="danger">
+
+      <ion-card-header>
+        <ion-card-title>
+          <p class="m-2 mb-3"> <strong class="fw-bolder fs-2 bg-dark text-light p-2 rounded"> {{orders}} </strong> </p>
+          <h3 class="m-0"> Orders</h3>
+        </ion-card-title>
+        <ion-card-subtitle>Orders available</ion-card-subtitle>
+      </ion-card-header>
+
+      <i class="fa-solid fa-list-check" id="summary-icons"
+        style="position: absolute; color: #1a464059; top: 10%; right: 10%; font-size: 7em; z-index: -1;"></i>
+
+      <ion-card-content>
+        <ion-button routerLink="orders" expand="block" style="--background: #1a464059; color:#f2f2f2;">
+          More info <ion-icon class="ms-1" name="arrow-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+
+    </ion-card>
+
+  </ion-col>
+
 </ion-row>

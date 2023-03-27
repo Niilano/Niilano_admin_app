@@ -14,6 +14,7 @@ export class SummaryPage implements OnInit {
   users!: number
   products!: number
   categories!: number
+  orders!: number
 
   constructor(private authService: AuthService, private http: HttpClient) { }
 
@@ -26,13 +27,14 @@ export class SummaryPage implements OnInit {
   ngOnInit() {
     this.authService.verifyAdmin()
 
-    this.http.get<{ userCount: number, productCount: number, categoryCount: number }>(`${environment.server}/admin/summary`)
+    this.http.get<{ userCount: number, productCount: number, categoryCount: number, ordersCount: number }>(`${environment.server}/admin/summary`)
       .pipe(take(1))
       .subscribe(
         res => {
           this.users = res.userCount
           this.products = res.productCount
           this.categories = res.categoryCount
+          this.orders = res.ordersCount
         }
       )
 
