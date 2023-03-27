@@ -1,9 +1,19 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>users</ion-title>
-  </ion-toolbar>
-</ion-header>
+<h3> All users </h3>
 
-<ion-content>
+<ion-searchbar></ion-searchbar>
 
-</ion-content>
+<div *ngFor="let user of users">
+
+  <ion-item lines="full">
+    <ion-avatar slot="start">
+      <img alt="user profile image" [src]="user.user_profile.url" />
+    </ion-avatar>
+    <ion-label>
+      <h2 class="fw-bold m-0 text-success" *ngIf="user.username"> {{user.username}} </h2>
+      <h3> {{user.first_name}} {{user.last_name}} </h3>
+      <p>{{user.email}}</p>
+      <p> Joined On : {{ user.createdAt | date:'MMM d, y h:mm a' }} </p>
+    </ion-label>
+  </ion-item>
+
+</div>

@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { take } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-users',
@@ -8,9 +11,20 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class UsersPage implements OnInit {
 
-  constructor(private authService:AuthService) { }
+  users:any
+
+  constructor(private authService:AuthService,private http:HttpClient) { }
 
   ngOnInit() {
+
+    this.http.get(`${environment.server}/admin/users`)
+    .pipe(take(1))
+    .subscribe(
+      res=>{
+this.users = res
+      }
+    )
+
   }
 
 }
