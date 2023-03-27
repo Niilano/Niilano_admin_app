@@ -12,6 +12,7 @@
       <h2 class="fw-bold m-0 text-success" *ngIf="user.username"> {{user.username}} </h2>
       <h3> {{user.first_name}} {{user.last_name}} </h3>
       <p>{{user.email}}</p>
+      <p>{{user.phone_number}}</p>
       <p> Joined On : {{ user.createdAt | date:'MMM d, y h:mm a' }} </p>
     </ion-label>
   </ion-item>
