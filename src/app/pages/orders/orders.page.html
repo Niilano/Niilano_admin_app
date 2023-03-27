@@ -106,7 +106,7 @@
     </ion-label>
   </ion-item>
 
-  <button (click)="rejectOrder(order.id)" *ngIf="order.status != 'Delivered'" class="btn btn-danger my-3 d-block mx-auto d-flex align-items-center justify-content-center">
+  <button (click)="rejectOrder(order.id)" *ngIf="order.status != 'Delivered' || order.status != 'Rejected' " class="btn btn-danger my-3 d-block mx-auto d-flex align-items-center justify-content-center">
     <ion-icon class="me-1" size="large" name="close-outline"></ion-icon> Close Order
   </button>
 
