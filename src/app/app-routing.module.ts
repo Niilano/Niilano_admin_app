@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { CategoriesPage } from './pages/categories/categories.page';
+import { OrdersPage } from './pages/orders/orders.page';
+import { ProductsPage } from './pages/products/products.page';
+import { SummaryPage } from './pages/summary/summary.page';
+import { UsersPage } from './pages/users/users.page';
 
 const routes: Routes = [
   {

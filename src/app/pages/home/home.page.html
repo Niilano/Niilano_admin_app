@@ -14,28 +14,28 @@
       </ion-label>
     </ion-item>
 
-    <ion-item (click)="closeMenu()" routerLink="users" class="mt-2" lines="none" button detail="true">
+    <ion-item (click)="redirect('users')" class="mt-2" lines="none" button detail="true">
       <ion-icon size="large" style="color: #1A4640;" name="people-circle-outline"></ion-icon>
       <ion-label class="ms-1">
         Manage Users
       </ion-label>
     </ion-item>
     
-    <ion-item (click)="closeMenu()" routerLink="categories" lines="none" class="mt-2" button detail="true">
+    <ion-item (click)="redirect('categories')" lines="none" class="mt-2" button detail="true">
       <ion-icon size="large" style="color: #1A4640;" name="star-outline"></ion-icon>
       <ion-label class="ms-1">
         Manage Categories
       </ion-label>
     </ion-item>
 
-    <ion-item (click)="closeMenu()" [routerLink]="'/products'" lines="none" class="mt-2" button detail="true">
+    <ion-item (click)="redirect('products')" lines="none" class="mt-2" button detail="true">
       <ion-icon size="large" style="color: #1A4640;" name="pricetags-outline"></ion-icon>
       <ion-label class="ms-1">
         Manage Products
       </ion-label>
     </ion-item>
 
-    <ion-item (click)="closeMenu()" [routerLink]="'products'" lines="none" class="mt-2" button detail="true">
+    <ion-item (click)="redirect('products')" lines="none" class="mt-2" button detail="true">
       <ion-icon size="large" style="color: #1A4640;" name="timer-outline"></ion-icon>
       <ion-label class="ms-1">
         Logs

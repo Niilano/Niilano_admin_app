@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuController, ToastController } from '@ionic/angular';
 import { take } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -11,16 +12,21 @@ import { environment } from 'src/environments/environment';
 })
 export class HomePage implements OnInit {
 
-  constructor( private menuctrl : MenuController, private toastController:ToastController, private authService: AuthService ) {}
+  constructor(private menuctrl: MenuController, private toastController: ToastController, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.authService.verifyAdmin()
   }
 
-  closeMenu(){
+  closeMenu() {
 
     this.menuctrl.close()
 
+  }
+
+  redirect(route: string) {
+    this.router.navigate([`dashboard/${route}`])
+    this.closeMenu()
   }
 
 }
