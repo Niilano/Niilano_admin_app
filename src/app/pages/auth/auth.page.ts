@@ -129,6 +129,8 @@ export class AuthPage implements OnInit {
         toast.present()
       })
 
+      this.load = false
+
       return
     }
 
