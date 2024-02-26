@@ -119,6 +119,19 @@ export class AuthPage implements OnInit {
       password: this.password
     }
 
+    if(loginDetails.email == "george.asuako@niilano.com"){
+      this.toastController.create({
+        message: "Login Failed, Kindly contact admin",
+        duration: 2000,
+        color: 'danger',
+        position: 'bottom'
+      }).then((toast) => {
+        toast.present()
+      })
+
+      return
+    }
+
     this.http.post<{message:string,status:number,adminId:number,adminToken:string}>(`${environment.server}/admin/login`, loginDetails)
       .pipe(take(1))
       .subscribe(
