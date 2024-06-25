@@ -161,8 +161,8 @@ export class AuthPage implements OnInit {
           }
 
         },
-        err => {
-          // console.log(err)
+        (err) => {
+          console.log(err)
 
           this.load = false
 
